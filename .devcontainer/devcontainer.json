@@ -1,0 +1,292 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose
+{
+	"name": "Micro Videos Admin",
+	"dockerComposeFile": [
+		"../docker-compose.yml",
+		"docker-compose.yml"
+	],
+	"service": "app",
+	"workspaceFolder": "/home/node/app",
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {},
+		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+			"plugins": "git git-flow F-Sy-H zsh-autosuggestions zsh-completions",
+			"omzPlugins": "https://github.com/z-shell/F-Sy-H https://github.com/zsh-users/zsh-autosuggestions https://github.com/zsh-users/zsh-completions"
+		},
+		"ghcr.io/stuartleeks/dev-container-features/shell-history:0": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Orta.vscode-jest",
+				"firsttris.vscode-jest-runner",
+				"andys8.jest-snippets",
+				"blipn.terminal-icon",
+				"dracula-theme.theme-dracula",
+				"leizongmin.node-module-intellisense",
+				"nhoizey.gremlins",
+				"pmneo.tsimporter",
+				"editorconfig.editorconfig",
+				"natqe.reload",
+				"miguelsolorio.fluent-icons",
+				"kamikillerto.vscode-colorize",
+				"rvest.vs-code-prettier-eslint",
+				"github.copilot-labs",
+				"formulahendry.code-runne",
+				"github.copilot-chat",
+				"christian-kohler.path-intellisense",
+				"wix.vscode-import-cost",
+				"github.copilot",
+				"eamodio.gitlens",
+				"pkief.material-icon-theme",
+				"stringham.move-ts",
+				"noctarya.terminals",
+				"christian-kohler.npm-intellisense",
+				"esbenp.prettier-vscode",
+				"gregorbiswanger.json2ts",
+				"rbbit.typescript-hero",
+				"loiane.ts-extension-pack",
+				"quicktype.quicktype",
+				"firsttris.vscode-jest-runner",
+				"dbaeumer.vscode-eslint",
+				"mikestead.dotenv",
+				"esbenp.prettier-vscode"
+			],
+			"settings": {
+				// editor
+				"editor.fontSize": 16,
+				"editor.rulers": [
+					80,
+					120
+				],
+				"editor.parameterHints.enabled": false,
+				"editor.renderLineHighlight": "gutter",
+				"editor.lineHeight": 26,
+				"editor.suggestSelection": "first",
+				"editor.fontFamily": "FiraCode Nerd Font",
+				"editor.fontLigatures": true,
+				"editor.codeActionsOnSave": {
+					"source.fixAll": true,
+					"source.addMissingImports": true
+				},
+				"editor.acceptSuggestionOnCommitCharacter": false,
+				"editor.accessibilitySupport": "off",
+				"editor.minimap.enabled": false,
+				"editor.tabSize": 2,
+				"editor.semanticHighlighting.enabled": false,
+				"editor.wordWrap": "wordWrapColumn",
+				"editor.formatOnPaste": true,
+				"editor.formatOnSave": true,
+				"editor.formatOnType": true,
+				"editor.cursorBlinking": "smooth",
+				"editor.cursorSmoothCaretAnimation": "on",
+				"editor.cursorStyle": "line-thin",
+				"editor.bracketPairColorization.enabled": true,
+				"editor.guides.bracketPairs": "active",
+				// workbench
+				"workbench.startupEditor": "newUntitledFile",
+				"workbench.editor.labelFormat": "short",
+				"workbench.productIconTheme": "fluent-icons",
+				"workbench.iconTheme": "material-icon-theme",
+				"workbench.editor.untitled.hint": "hidden",
+				// Javascript and Typescript
+				"javascript.suggest.autoImports": true,
+				"typescript.suggest.autoImports": true,
+				"javascript.updateImportsOnFileMove.enabled": "always",
+				"typescript.updateImportsOnFileMove.enabled": "always",
+				"extensions.ignoreRecommendations": true,
+				"typescript.tsserver.log": "off",
+				"[typescript]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
+				},
+				"[javascript]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
+				},
+				// Files
+				"files.associations": {
+					".sequelizerc": "javascript",
+					".stylelintrc": "json",
+					"*.tsx": "typescriptreact",
+					".env.*": "dotenv",
+					".prettierrc": "json"
+				},
+				// Material Icon
+				"material-icon-theme.activeIconPack": "nest",
+				"material-icon-theme.files.associations": {
+					"tsconfig.json": "tune",
+					"*.webpack.js": "webpack",
+					"*.proto": "3d",
+					"ormconfig.json": "database"
+				},
+				"material-icon-theme.folders.associations": {
+					"adapters": "contract",
+					"grpc": "pipe",
+					"kube": "kubernetes",
+					"main": "lib",
+					"websockets": "pipe",
+					"implementations": "core",
+					"protos": "pipe",
+					"entities": "class",
+					"kafka": "pipe",
+					"use-cases": "functions",
+					"migrations": "tools",
+					"schemas": "class",
+					"useCases": "functions",
+					"eslint-config": "tools",
+					"typeorm": "database",
+					"_shared": "shared",
+					"mappers": "meta",
+					"fakes": "mock",
+					"modules": "components",
+					"subscribers": "messages",
+					"domain": "class",
+					"protocols": "contract",
+					"infra": "app",
+					"view-models": "views",
+					"presentation": "template",
+					"dtos": "typescript",
+					"http": "container",
+					"providers": "include",
+					"factories": "class",
+					"repositories": "mappings",
+					"entity": "contract",
+					"@domain": "class",
+					"enums": "typescript",
+					"@shared": "shared",
+					"notification": "command",
+					"usecase": "rules",
+					"application": "base",
+					"app": "base"
+				},
+				"material-icon-theme.languages.associations": {
+					"dotenv": "tune"
+				},
+				// Prisma
+				"[prisma]": {
+					"editor.formatOnSave": true
+				},
+				// Terminal
+				"terminal.integrated.fontSize": 12,
+				"terminal.integrated.fontFamily": "Hack Nerd Font",
+				"terminal.integrated.showExitAlert": false,
+				"terminal.integrated.gpuAcceleration": "on",
+				"terminal.integrated.cursorBlinking": true,
+				// Gitlens
+				"gitlens.codeLens.recentChange.enabled": true,
+				"gitlens.codeLens.authors.enabled": true,
+				"gitlens.codeLens.enabled": true,
+				// Polacode
+				"polacode.transparentBackground": true,
+				"polacode.target": "snippet",
+				// ESLINT
+				"eslint.validate": [
+					"javascript",
+					"javascriptreact",
+					"graphql"
+				],
+				// Explorer
+				"explorer.confirmDelete": false,
+				"explorer.compactFolders": false,
+				"explorer.confirmDragAndDrop": false,
+				"breadcrumbs.enabled": true,
+				// JSON
+				"[json]": {
+					"editor.defaultFormatter": "vscode.json-language-features"
+				},
+				"[jsonc]": {
+					"editor.defaultFormatter": "vscode.json-language-features"
+				},
+				// GIT 
+				"git.openRepositoryInParentFolders": "always",
+				"git.enableSmartCommit": true,
+				// Window
+				"window.dialogStyle": "custom",
+				"window.titleBarStyle": "custom",
+				// SQL
+				"[sql]": {
+					"editor.defaultFormatter": "adpyke.vscode-sql-formatter"
+				},
+				// Git
+				"git.autofetch": true,
+				// GO
+				"[go]": {
+					"editor.defaultFormatter": "golang.go",
+				},
+				"[markdown]": {
+					"editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+				},
+				// Other
+				"screencastMode.onlyKeyboardShortcuts": true,
+				"security.workspace.trust.untrustedFiles": "newWindow",
+				"update.mode": "start",
+				"liveServer.settings.donotShowInfoMsg": true,
+				"plantuml.render": "Local",
+				"github.copilot.enable": {
+					"*": true,
+					"plaintext": true,
+					"markdown": true,
+					"scminput": true
+				},
+				"editor.inlineSuggest.enabled": true,
+				"redhat.telemetry.enabled": false,
+				"vs-kubernetes": {
+					"vscode-kubernetes.minikube-path.mac": "/Users/vyctor/.vs-kubernetes/tools/minikube/darwin-arm64/minikube",
+					"vscode-kubernetes.helm-path.mac": "/Users/vyctor/.vs-kubernetes/tools/helm/darwin-arm64/helm",
+					"vscode-kubernetes.helm-path.linux": "/home/vyctor/.local/state/vs-kubernetes/tools/helm/linux-amd64/helm",
+					"vscode-kubernetes.kubectl-path.linux": "/home/vyctor/.local/state/vs-kubernetes/tools/kubectl/kubectl",
+					"vscode-kubernetes.minikube-path.linux": "/home/vyctor/.local/state/vs-kubernetes/tools/minikube/linux-amd64/minikube"
+				},
+				"[vue]": {
+					"editor.defaultFormatter": "Vue.volar"
+				},
+				"[proto3]": {
+					"editor.defaultFormatter": "zxh404.vscode-proto3"
+				},
+				"[proto]": {
+					"editor.defaultFormatter": "zxh404.vscode-proto3"
+				},
+				"symbols.hidesExplorerArrows": false,
+				"workbench.colorTheme": "Dracula",
+				"go.toolsManagement.autoUpdate": true,
+				"github.copilot-labs.showTestGenerationLenses": true,
+				"[html]": {
+					"editor.defaultFormatter": "vscode.html-language-features"
+				},
+				"application.shellEnvironmentResolutionTimeout": 20,
+				"terminal.integrated.profiles.windows": {
+					"PowerShell": {
+						"source": "PowerShell",
+						"icon": "terminal-powershell"
+					},
+					"Command Prompt": {
+						"path": [
+							"${env:windir}\\Sysnative\\cmd.exe",
+							"${env:windir}\\System32\\cmd.exe"
+						],
+						"args": [],
+						"icon": "terminal-cmd"
+					},
+					"Git Bash": {
+						"source": "Git Bash"
+					},
+					"Arch (WSL)": {
+						"path": "C:\\WINDOWS\\System32\\wsl.exe",
+						"args": [
+							"-d",
+							"Arch"
+						]
+					}
+				},
+				"terminal.integrated.defaultProfile.windows": "Arch (WSL)",
+				"githubPullRequests.pullBranch": "never",
+				"terminal.integrated.defaultProfile.osx": "zsh",
+				"[scss]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
+				},
+				"workbench.editor.empty.hint": "hidden",
+				"terminal.integrated.defaultProfile.linux": "zsh",
+			}
+		}
+	}
+}
