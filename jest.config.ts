@@ -1,4 +1,4 @@
-import type {Config} from 'jest';
+import type { Config } from "jest";
 
 const config: Config = {
   clearMocks: true,
@@ -6,7 +6,7 @@ const config: Config = {
   transform: {
     "^.+\\.(t|j)sx?$": "@swc/jest",
   },
-  rootDir: "./src"
+  rootDir: "./src",
 };
 
 export default config;

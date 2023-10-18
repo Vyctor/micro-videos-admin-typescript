@@ -1,3 +1,4 @@
+import { CategoryValidatorFactory } from "./category.validator";
 import { Uuid } from "./value-objects/uuid.vo";
 
 export type CategoryConstructorProps = {
@@ -31,6 +32,11 @@ export class Category {
 
   static create(props: CategoryCreateCommand): Category {
     return new Category(props);
+  }
+
+  static validate(entity: Category) {
+    const validator = CategoryValidatorFactory.create(entity);
+    return validator.validate(entity);
   }
 
   changeName(name: string): void {
