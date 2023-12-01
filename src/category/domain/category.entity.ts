@@ -25,13 +25,15 @@ export class Category {
   constructor(props: CategoryConstructorProps) {
     this.category_id = props.category_id ?? new Uuid();
     this.name = props.name;
-    this.description = props.description;
+    this.description = props.description ?? null;
     this.is_active = props.is_active ?? true;
     this.created_at = props.created_at ?? new Date();
   }
 
   static create(props: CategoryCreateCommand): Category {
-    return new Category(props);
+    const category = new Category(props);
+    Category.validate(category);
+    return category;
   }
 
   static validate(entity: Category) {
@@ -41,10 +43,12 @@ export class Category {
 
   changeName(name: string): void {
     this.name = name;
+    Category.validate(this);
   }
 
   changeDescription(description: string): void {
     this.description = description;
+    Category.validate(this);
   }
 
   activate(): void {
