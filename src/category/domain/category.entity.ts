@@ -1,3 +1,4 @@
+import { EntityValidationError } from "../../shared/domain/validators/validation.error";
 import { CategoryValidatorFactory } from "./category.validator";
 import { Uuid } from "./value-objects/uuid.vo";
 
@@ -38,7 +39,10 @@ export class Category {
 
   static validate(entity: Category) {
     const validator = CategoryValidatorFactory.create(entity);
-    return validator.validate(entity);
+    const isValid = validator.validate(entity);
+    if (!isValid) {
+      throw new EntityValidationError(validator.errors);
+    }
   }
 
   changeName(name: string): void {

@@ -73,3 +73,9 @@ describe("Category Unit Tests", () => {
     expect(category.category_id).toBeInstanceOf(Uuid);
   });
 });
+
+describe("Category Validator", () => {
+  describe("create command", () => {
+    it("xpto", () => {});
+  });
+});
