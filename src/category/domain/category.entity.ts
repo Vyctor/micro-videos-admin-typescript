@@ -38,20 +38,6 @@ export class Category extends Entity {
     return this.category_id;
   }
 
-  static create(props: CategoryCreateCommand): Category {
-    const category = new Category(props);
-    Category.validate(category);
-    return category;
-  }
-
-  static validate(entity: Category) {
-    const validator = CategoryValidatorFactory.create(entity);
-    const isValid = validator.validate(entity);
-    if (!isValid) {
-      throw new EntityValidationError(validator.errors);
-    }
-  }
-
   changeName(name: string): void {
     this.name = name;
     Category.validate(this);
@@ -70,6 +56,11 @@ export class Category extends Entity {
     this.is_active = false;
   }
 
+  update(props: { name: string; description: string }): void {
+    this.changeName(props.name);
+    this.changeDescription(props.description);
+  }
+
   toJSON() {
     return {
       category_id: this.category_id.id,
@@ -78,5 +69,19 @@ export class Category extends Entity {
       is_active: this.is_active,
       created_at: this.created_at,
     };
+  }
+
+  static create(props: CategoryCreateCommand): Category {
+    const category = new Category(props);
+    Category.validate(category);
+    return category;
+  }
+
+  static validate(entity: Category) {
+    const validator = CategoryValidatorFactory.create(entity);
+    const isValid = validator.validate(entity);
+    if (!isValid) {
+      throw new EntityValidationError(validator.errors);
+    }
   }
 }

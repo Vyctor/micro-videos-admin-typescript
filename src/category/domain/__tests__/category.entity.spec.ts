@@ -59,6 +59,24 @@ describe("Category Unit Tests", () => {
     expect(validateSpy).toBeCalledTimes(1);
   });
 
+  it("should update category", () => {
+    const category = Category.create({
+      name: "Movie",
+      description: "Movie Description",
+    });
+
+    expect(category.name).toBe("Movie");
+    expect(category.description).toBe("Movie Description");
+
+    category.update({
+      name: "Music",
+      description: "Music Description",
+    });
+    expect(category.name).toBe("Music");
+    expect(category.description).toBe("Music Description");
+    expect(validateSpy).toHaveBeenCalledTimes(3);
+  });
+
   it.each([
     {
       category_id: null,
