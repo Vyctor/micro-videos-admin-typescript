@@ -16,7 +16,8 @@ export interface Repository<E extends Entity, EntityId extends ValueObject> {
 export interface SearcheableRepository<
   E extends Entity,
   EntityId extends ValueObject,
-  SearchInput = SearchParams,
+  Filter = string,
+  SearchInput = SearchParams<Filter>,
   SearchOutput = SearchResult
 > extends Repository<E, EntityId> {
   sortableFields: string[];
