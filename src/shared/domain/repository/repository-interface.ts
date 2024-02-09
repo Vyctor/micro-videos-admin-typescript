@@ -13,7 +13,7 @@ export interface Repository<E extends Entity, EntityId extends ValueObject> {
   getEntity(): new (...args: any[]) => E;
 }
 
-export interface SearcheableRepository<
+export interface SearchableRepository<
   E extends Entity,
   EntityId extends ValueObject,
   Filter = string,
