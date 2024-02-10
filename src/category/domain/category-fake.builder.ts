@@ -5,14 +5,18 @@ import { Uuid } from "./value-objects/uuid.vo";
 type PropOrFactory<T> = T | ((index: number) => T);
 
 export class CategoryFakeBuilder<TBuild = any> {
-  private readonly chance = new Chance();
-
+  // auto generated in entity
   private _category_id: PropOrFactory<Uuid> | undefined = undefined;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private _name: PropOrFactory<string> = (_index) => this.chance.word();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private _description: PropOrFactory<string | null> = (_index) =>
     this.chance.paragraph();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private _is_active: PropOrFactory<boolean> = (_index) => true;
+  // auto generated in entity
   private _created_at: PropOrFactory<Date> | undefined = undefined;
+
   private countObjs;
 
   static aCategory() {
@@ -23,8 +27,11 @@ export class CategoryFakeBuilder<TBuild = any> {
     return new CategoryFakeBuilder<Category[]>(countObjs);
   }
 
+  private chance: Chance.Chance;
+
   private constructor(countObjs: number = 1) {
     this.countObjs = countObjs;
+    this.chance = Chance();
   }
 
   withUuid(valueOrFactory: PropOrFactory<Uuid>) {
@@ -77,7 +84,7 @@ export class CategoryFakeBuilder<TBuild = any> {
             created_at: this.callFactory(this._created_at, index),
           }),
         });
-        Category.validate(category);
+        //category.validate();
         return category;
       });
     return this.countObjs === 1 ? (categories[0] as any) : categories;
