@@ -8,6 +8,7 @@ const config: Config = {
     "^.+\\.(t|j)sx?$": "@swc/jest",
   },
   rootDir: "./src",
+  coverageDirectory: "../coverage",
 };
 
 export default config;
