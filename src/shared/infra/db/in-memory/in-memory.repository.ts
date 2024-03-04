@@ -17,7 +17,7 @@ export abstract class InMemoryRepository<
   EntityId extends ValueObject
 > implements Repository<E, EntityId>
 {
-  items: E[] = [];
+  public items: E[] = [];
 
   async insert(entity: E): Promise<void> {
     this.items.push(entity);
