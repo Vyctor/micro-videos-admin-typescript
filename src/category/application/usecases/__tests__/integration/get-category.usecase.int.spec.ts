@@ -6,7 +6,7 @@ import { CategorySequelizeRepository } from "../../../../infra/db/sequelize/cate
 import { CategoryModel } from "../../../../infra/db/sequelize/category.model";
 import { GetCategoryUseCase } from "../../get-category.usecase";
 
-describe("DeleteCategoryUsecase Integration tests", () => {
+describe("GetCategoryUsecase Integration tests", () => {
   let usecase: GetCategoryUseCase;
   let categoryRepository: CategorySequelizeRepository;
 

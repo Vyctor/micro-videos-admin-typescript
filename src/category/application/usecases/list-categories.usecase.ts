@@ -8,6 +8,7 @@ import {
   CategoryFilter,
   CategoryRepository,
   CategorySearchParams,
+  CategorySearchResult,
 } from "../../domain/category.repository";
 import { CategoryOutput, CategoryOutputMapper } from "./common/category-output";
 
@@ -31,9 +32,16 @@ export class ListCategoriesUsecase
   ): Promise<ListCategoriesUsecaseOutput> {
     const params = new CategorySearchParams(input);
     const searchResult = await this.categoryRepository.search(params);
-    const outputItems = searchResult.items.map((item) => {
+    return this.toOutput(searchResult);
+  }
+
+  private toOutput(
+    searchResult: CategorySearchResult
+  ): ListCategoriesUsecaseOutput {
+    const { items: _items } = searchResult;
+    const items = _items.map((item) => {
       return CategoryOutputMapper.toOutput(item);
     });
-    return PaginationOutputMapper.toOutput(outputItems, searchResult);
+    return PaginationOutputMapper.toOutput(items, searchResult);
   }
 }
