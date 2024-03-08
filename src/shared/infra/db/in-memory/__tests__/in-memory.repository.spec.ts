@@ -170,7 +170,7 @@ describe("InMemoryRepository Unit Tests", () => {
     });
 
     await expect(repository.delete(entity.entity_id)).rejects.toThrow(
-      new NotFoundError(entity.entity_id, StubEntity)
+      new NotFoundError(entity.entity_id.id, StubEntity)
     );
   });
 

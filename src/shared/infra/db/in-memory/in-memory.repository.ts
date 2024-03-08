@@ -1,3 +1,4 @@
+import { Uuid } from "../../../../category/domain/value-objects/uuid.vo";
 import { Entity } from "../../../domain/entity";
 import { InvalidArgumentError } from "../../../domain/errors/invalid-argument.error";
 import { NotFoundError } from "../../../domain/errors/not-found.error";
@@ -14,7 +15,7 @@ import { ValueObject } from "../../../domain/value-object";
 
 export abstract class InMemoryRepository<
   E extends Entity,
-  EntityId extends ValueObject
+  EntityId extends Uuid
 > implements Repository<E, EntityId>
 {
   public items: E[] = [];
@@ -41,7 +42,7 @@ export abstract class InMemoryRepository<
       item.entity_id.equals(entity_id)
     );
     if (indexFound === -1) {
-      throw new NotFoundError(entity_id, this.getEntity());
+      throw new NotFoundError(entity_id.id, this.getEntity());
     }
     this.items.splice(indexFound, 1);
   }
@@ -95,7 +96,7 @@ export abstract class InMemoryRepository<
 
 export abstract class InMemorySearchableRepository<
     E extends Entity,
-    EntityId extends ValueObject,
+    EntityId extends Uuid,
     Filter = string
   >
   extends InMemoryRepository<E, EntityId>
