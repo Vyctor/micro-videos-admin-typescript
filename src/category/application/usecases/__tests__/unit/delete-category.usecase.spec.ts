@@ -1,8 +1,8 @@
-import { Uuid } from "../../../domain/value-objects/uuid.vo";
+import { NotFoundError } from "../../../../../shared/domain/errors/not-found.error";
+import { Category } from "../../../../domain/category.entity";
+import { Uuid } from "../../../../domain/value-objects/uuid.vo";
+import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory/category-in-memory.repository";
 import { DeleteCategoryUsecase } from "../../delete-category.usecase";
-import { NotFoundError } from "../../../../shared/domain/errors/not-found.error";
-import { Category } from "../../../domain/category.entity";
-import { CategoryInMemoryRepository } from "../../../infra/db/in-memory/category-in-memory.repository";
 
 describe("DeleteCategoryUsecase Integration tests", () => {
   let usecase: DeleteCategoryUsecase;

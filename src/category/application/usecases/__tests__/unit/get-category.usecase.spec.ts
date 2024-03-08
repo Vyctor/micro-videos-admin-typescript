@@ -1,7 +1,7 @@
-import { Uuid } from "../../../domain/value-objects/uuid.vo";
-import { NotFoundError } from "../../../../shared/domain/errors/not-found.error";
-import { Category } from "../../../domain/category.entity";
-import { CategoryInMemoryRepository } from "../../../infra/db/in-memory/category-in-memory.repository";
+import { NotFoundError } from "../../../../../shared/domain/errors/not-found.error";
+import { Category } from "../../../../domain/category.entity";
+import { Uuid } from "../../../../domain/value-objects/uuid.vo";
+import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory/category-in-memory.repository";
 import { GetCategoryUseCase } from "../../get-category.usecase";
 
 describe("GetCategoryUsecase Integration tests", () => {
@@ -25,8 +25,8 @@ describe("GetCategoryUsecase Integration tests", () => {
     const category = Category.create({ name: "Category 1" });
     const repositorySpy = jest.spyOn(categoryRepository, "findById");
     await categoryRepository.insert(category);
-    const getCategory = await usecase.execute({ id: category.category_id.id });
 
+    const getCategory = await usecase.execute({ id: category.category_id.id });
     expect(repositorySpy).toHaveBeenCalledWith(category.category_id);
     expect(repositorySpy).toHaveBeenCalledTimes(1);
     expect(repositorySpy).toHaveReturnedTimes(1);

@@ -1,4 +1,4 @@
-import { CategoryInMemoryRepository } from "../../../infra/db/in-memory/category-in-memory.repository";
+import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory/category-in-memory.repository";
 import { CreateCategoryUsecase } from "../../create-category.usecase";
 
 describe("CreateCategoryUsecase unit tests", () => {

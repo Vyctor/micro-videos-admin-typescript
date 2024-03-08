@@ -1,6 +1,6 @@
-import { Usecase } from "../../shared/application/usecase.interface";
-import { CategoryRepository } from "../domain/category.repository";
-import { Uuid } from "../domain/value-objects/uuid.vo";
+import { Usecase } from "../../../shared/application/usecase.interface";
+import { CategoryRepository } from "../../domain/category.repository";
+import { Uuid } from "../../domain/value-objects/uuid.vo";
 
 export type DeleteCategoryUsecaseInput = {
   id: string;
