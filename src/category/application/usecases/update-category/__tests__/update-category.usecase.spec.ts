@@ -5,7 +5,7 @@ import {
   Uuid,
 } from "../../../../domain/value-objects/uuid.vo";
 import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory/category-in-memory.repository";
-import { UpdateCategoryUseCase } from "../../update-category.usecase";
+import { UpdateCategoryUseCase } from "../update-category.usecase";
 
 describe("UpdateCategoryUseCase Unit Tests", () => {
   let useCase: UpdateCategoryUseCase;

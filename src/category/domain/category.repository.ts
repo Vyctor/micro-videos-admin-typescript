@@ -10,7 +10,7 @@ export class CategorySearchParams extends SearchParams<CategoryFilter> {}
 
 export class CategorySearchResult extends SearchResult<Category> {}
 
-export interface ICategoryRepository
+export interface CategoryRepository
   extends SearchableRepository<
     Category,
     Uuid,

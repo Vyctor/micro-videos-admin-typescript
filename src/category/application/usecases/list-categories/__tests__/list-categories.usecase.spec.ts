@@ -1,20 +1,15 @@
-import { setupSequelize } from "../../../../../shared/infra/testing/helpers";
 import { Category } from "../../../../domain/category.entity";
 import { CategorySearchResult } from "../../../../domain/category.repository";
-import { Uuid } from "../../../../domain/value-objects/uuid.vo";
-import { CategorySequelizeRepository } from "../../../../infra/db/sequelize/category-sequelize.repository";
-import { CategoryModel } from "../../../../infra/db/sequelize/category.model";
+import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory/category-in-memory.repository";
 import { CategoryOutputMapper } from "../../common/category-output";
-import { ListCategoriesUsecase } from "../../list-categories.usecase";
+import { ListCategoriesUsecase } from "../list-categories.usecase";
 
-describe("ListCategoriesUsecase Integration tests", () => {
+describe("LietCategoriesUsecase unit tests", () => {
   let usecase: ListCategoriesUsecase;
-  let categoryRepository: CategorySequelizeRepository;
-
-  setupSequelize({ models: [CategoryModel] });
+  let categoryRepository: CategoryInMemoryRepository;
 
   beforeEach(() => {
-    categoryRepository = new CategorySequelizeRepository(CategoryModel);
+    categoryRepository = new CategoryInMemoryRepository();
     usecase = new ListCategoriesUsecase(categoryRepository);
   });
 
@@ -63,7 +58,7 @@ describe("ListCategoriesUsecase Integration tests", () => {
         created_at: new Date(new Date().getTime() + 100),
       }),
     ];
-    await categoryRepository.bulkInsert(items);
+    categoryRepository.items = items;
 
     const output = await usecase.execute({});
     expect(output).toStrictEqual({
@@ -84,7 +79,7 @@ describe("ListCategoriesUsecase Integration tests", () => {
       new Category({ name: "c" }),
     ];
 
-    await categoryRepository.bulkInsert(items);
+    categoryRepository.items = items;
 
     let output = await usecase.execute({
       page: 1,

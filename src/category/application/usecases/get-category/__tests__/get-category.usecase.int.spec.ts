@@ -1,15 +1,19 @@
 import { NotFoundError } from "../../../../../shared/domain/errors/not-found.error";
+import { setupSequelize } from "../../../../../shared/infra/testing/helpers";
 import { Category } from "../../../../domain/category.entity";
 import { Uuid } from "../../../../domain/value-objects/uuid.vo";
-import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory/category-in-memory.repository";
-import { GetCategoryUseCase } from "../../get-category.usecase";
+import { CategorySequelizeRepository } from "../../../../infra/db/sequelize/category-sequelize.repository";
+import { CategoryModel } from "../../../../infra/db/sequelize/category.model";
+import { GetCategoryUseCase } from "../get-category.usecase";
 
 describe("GetCategoryUsecase Integration tests", () => {
   let usecase: GetCategoryUseCase;
-  let categoryRepository: CategoryInMemoryRepository;
+  let categoryRepository: CategorySequelizeRepository;
+
+  setupSequelize({ models: [CategoryModel] });
 
   beforeEach(() => {
-    categoryRepository = new CategoryInMemoryRepository();
+    categoryRepository = new CategorySequelizeRepository(CategoryModel);
     usecase = new GetCategoryUseCase(categoryRepository);
   });
 
@@ -23,11 +27,14 @@ describe("GetCategoryUsecase Integration tests", () => {
 
   it("should get an existent category", async () => {
     const category = Category.create({ name: "Category 1" });
-    const repositorySpy = jest.spyOn(categoryRepository, "findById");
     await categoryRepository.insert(category);
 
+    const repositorySpy = jest.spyOn(categoryRepository, "findById");
     const getCategory = await usecase.execute({ id: category.category_id.id });
-    expect(repositorySpy).toHaveBeenCalledWith(category.category_id);
+
+    expect(repositorySpy).toHaveBeenCalledWith({
+      id: category.category_id.id,
+    });
     expect(repositorySpy).toHaveBeenCalledTimes(1);
     expect(repositorySpy).toHaveReturnedTimes(1);
     expect(getCategory).toBeDefined();

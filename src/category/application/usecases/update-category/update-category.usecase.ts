@@ -1,15 +1,19 @@
-import { Usecase } from "../../../shared/application/usecase.interface";
-import { NotFoundError } from "../../../shared/domain/errors/not-found.error";
-import { EntityValidationError } from "../../../shared/domain/validators/validation.error";
-import { Category } from "../../domain/category.entity";
-import { ICategoryRepository } from "../../domain/category.repository";
-import { Uuid } from "../../domain/value-objects/uuid.vo";
-import { CategoryOutput, CategoryOutputMapper } from "./common/category-output";
+import { IUseCase } from "../../../../shared/application/use-case.interface";
+import { NotFoundError } from "../../../../shared/domain/errors/not-found.error";
+import { EntityValidationError } from "../../../../shared/domain/validators/validation.error";
+import { Category } from "../../../domain/category.entity";
+import { CategoryRepository } from "../../../domain/category.repository";
+import { Uuid } from "../../../domain/value-objects/uuid.vo";
+import {
+  CategoryOutput,
+  CategoryOutputMapper,
+} from "../common/category-output";
+import { UpdateCategoryInput } from "./update-category.input";
 
 export class UpdateCategoryUseCase
-  implements Usecase<UpdateCategoryInput, UpdateCategoryOutput>
+  implements IUseCase<UpdateCategoryInput, UpdateCategoryOutput>
 {
-  constructor(private categoryRepo: ICategoryRepository) {}
+  constructor(private categoryRepo: CategoryRepository) {}
 
   async execute(input: UpdateCategoryInput): Promise<UpdateCategoryOutput> {
     const uuid = new Uuid(input.id);
@@ -42,12 +46,5 @@ export class UpdateCategoryUseCase
     return CategoryOutputMapper.toOutput(category);
   }
 }
-
-export type UpdateCategoryInput = {
-  id: string;
-  name?: string;
-  description?: string;
-  is_active?: boolean;
-};
 
 export type UpdateCategoryOutput = CategoryOutput;

@@ -1,9 +1,12 @@
-import { Usecase } from "../../../shared/application/usecase.interface";
-import { NotFoundError } from "../../../shared/domain/errors/not-found.error";
-import { Category } from "../../domain/category.entity";
-import { CategoryRepository } from "../../domain/category.repository";
-import { Uuid } from "../../domain/value-objects/uuid.vo";
-import { CategoryOutput, CategoryOutputMapper } from "./common/category-output";
+import { Usecase } from "../../../../shared/application/usecase.interface";
+import { NotFoundError } from "../../../../shared/domain/errors/not-found.error";
+import { Category } from "../../../domain/category.entity";
+import { CategoryRepository } from "../../../domain/category.repository";
+import { Uuid } from "../../../domain/value-objects/uuid.vo";
+import {
+  CategoryOutput,
+  CategoryOutputMapper,
+} from "../common/category-output";
 
 export type GetCategoryUsecaseInput = {
   id: string;

@@ -4,7 +4,7 @@ import { Category } from "../../../../domain/category.entity";
 import { Uuid } from "../../../../domain/value-objects/uuid.vo";
 import { CategorySequelizeRepository } from "../../../../infra/db/sequelize/category-sequelize.repository";
 import { CategoryModel } from "../../../../infra/db/sequelize/category.model";
-import { UpdateCategoryUseCase } from "../../update-category.usecase";
+import { UpdateCategoryUseCase } from "../update-category.usecase";
 
 describe("UpdateCategoryUseCase Integration Tests", () => {
   let useCase: UpdateCategoryUseCase;

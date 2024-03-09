@@ -1,16 +1,19 @@
-import { Usecase } from "../../../shared/application/usecase.interface";
-import { SortDirection } from "../../../shared/domain/repository/search-params";
+import { Usecase } from "../../../../shared/application/usecase.interface";
+import { SortDirection } from "../../../../shared/domain/repository/search-params";
 import {
   PaginationOutput,
   PaginationOutputMapper,
-} from "../../../shared/application/paginations-output";
+} from "../../../../shared/application/paginations-output";
 import {
   CategoryFilter,
   CategoryRepository,
   CategorySearchParams,
   CategorySearchResult,
-} from "../../domain/category.repository";
-import { CategoryOutput, CategoryOutputMapper } from "./common/category-output";
+} from "../../../domain/category.repository";
+import {
+  CategoryOutput,
+  CategoryOutputMapper,
+} from "../common/category-output";
 
 export type ListCategoriesUsecaseInput = {
   page?: number;
