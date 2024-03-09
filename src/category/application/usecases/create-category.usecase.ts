@@ -1,22 +1,31 @@
 import { Usecase } from "../../../shared/application/usecase.interface";
+import { EntityValidationError } from "../../../shared/domain/validators/validation.error";
 import { Category } from "../../domain/category.entity";
 import { CategoryRepository } from "../../domain/category.repository";
 import { CategoryOutput, CategoryOutputMapper } from "./common/category-output";
 
-export type CreateCategoryUsecaseInput = {
+export class CreateCategoryUseCase
+  implements Usecase<CreateCategoryInput, CreateCategoryOutput>
+{
+  constructor(private readonly categoryRepo: CategoryRepository) {}
+
+  async execute(input: CreateCategoryInput): Promise<CreateCategoryOutput> {
+    const entity = Category.create(input);
+
+    if (entity.notification.hasErrors()) {
+      throw new EntityValidationError(entity.notification.toJSON());
+    }
+
+    await this.categoryRepo.insert(entity);
+
+    return CategoryOutputMapper.toOutput(entity);
+  }
+}
+
+export type CreateCategoryInput = {
   name: string;
   description?: string | null;
   is_active?: boolean;
 };
 
-export class CreateCategoryUsecase
-  implements Usecase<CreateCategoryUsecaseInput, CategoryOutput>
-{
-  constructor(private readonly categoryRepository: CategoryRepository) {}
-
-  async execute(input: CreateCategoryUsecaseInput): Promise<CategoryOutput> {
-    const entity = Category.create(input);
-    await this.categoryRepository.insert(entity);
-    return CategoryOutputMapper.toOutput(entity);
-  }
-}
+export type CreateCategoryOutput = CategoryOutput;

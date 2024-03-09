@@ -1,40 +1,46 @@
 import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory/category-in-memory.repository";
-import { CreateCategoryUsecase } from "../../create-category.usecase";
+import { CreateCategoryUseCase } from "../../create-category.usecase";
 
-describe("CreateCategoryUsecase unit tests", () => {
-  let usecase: CreateCategoryUsecase;
-  let categoryRepository: CategoryInMemoryRepository;
+describe("CreateCategoryUseCase Unit Tests", () => {
+  let useCase: CreateCategoryUseCase;
+  let repository: CategoryInMemoryRepository;
 
   beforeEach(() => {
-    categoryRepository = new CategoryInMemoryRepository();
-    usecase = new CreateCategoryUsecase(categoryRepository);
+    repository = new CategoryInMemoryRepository();
+    useCase = new CreateCategoryUseCase(repository);
+  });
+
+  it("should throw an error when aggregate is not valid", async () => {
+    const input = { name: "t".repeat(256) };
+    await expect(() => useCase.execute(input)).rejects.toThrowError(
+      "Entity Validation Error"
+    );
   });
 
   it("should create a category", async () => {
-    const spyInsert = jest.spyOn(categoryRepository, "insert");
-    let output = await usecase.execute({ name: "Category 1" });
+    const spyInsert = jest.spyOn(repository, "insert");
+    let output = await useCase.execute({ name: "test" });
     expect(spyInsert).toHaveBeenCalledTimes(1);
     expect(output).toStrictEqual({
-      id: categoryRepository.items[0].category_id.id,
-      name: categoryRepository.items[0].name,
-      description: categoryRepository.items[0].description,
+      id: repository.items[0].category_id.id,
+      name: "test",
+      description: null,
       is_active: true,
-      created_at: categoryRepository.items[0].created_at,
+      created_at: repository.items[0].created_at,
     });
 
-    output = await usecase.execute({
-      name: "Category 2",
-      description: "Description 2",
+    output = await useCase.execute({
+      name: "test",
+      description: "some description",
       is_active: false,
     });
-
     expect(spyInsert).toHaveBeenCalledTimes(2);
     expect(output).toStrictEqual({
-      id: categoryRepository.items[1].category_id.id,
-      name: categoryRepository.items[1].name,
-      description: categoryRepository.items[1].description,
+      id: repository.items[1].category_id.id,
+      name: "test",
+      description: "some description",
       is_active: false,
-      created_at: categoryRepository.items[1].created_at,
+      created_at: repository.items[1].created_at,
     });
   });
 });
