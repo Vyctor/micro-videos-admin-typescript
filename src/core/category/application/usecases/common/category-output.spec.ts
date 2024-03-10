@@ -1,14 +1,14 @@
-import { Category } from "../../../domain/category.entity";
-import { CategoryOutputMapper } from "./category-output";
+import { Category } from '../../../domain/category.entity';
+import { CategoryOutputMapper } from './category-output';
 
-describe("CategoryOutputMapper unit tests", () => {
-  it("should convert a category in output", () => {
+describe('CategoryOutputMapper unit tests', () => {
+  it('should convert a category in output', () => {
     const entity = Category.create({
-      name: "Movie",
-      description: "Category of movies",
+      name: 'Movie',
+      description: 'Category of movies',
       is_active: true,
     });
-    const spyToJSON = jest.spyOn(entity, "toJSON");
+    const spyToJSON = jest.spyOn(entity, 'toJSON');
     const output = CategoryOutputMapper.toOutput(entity);
     expect(spyToJSON).toHaveBeenCalledTimes(1);
     expect(output).toStrictEqual({

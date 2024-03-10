@@ -1,13 +1,12 @@
-import { setupSequelize } from "../../../../../shared/infra/testing/helpers";
-import { Category } from "../../../../domain/category.entity";
-import { CategorySearchResult } from "../../../../domain/category.repository";
-import { Uuid } from "../../../../domain/value-objects/uuid.vo";
-import { CategorySequelizeRepository } from "../../../../infra/db/sequelize/category-sequelize.repository";
-import { CategoryModel } from "../../../../infra/db/sequelize/category.model";
-import { CategoryOutputMapper } from "../../common/category-output";
-import { ListCategoriesUsecase } from "../list-categories.usecase";
+import { setupSequelize } from '../../../../../shared/infra/testing/helpers';
+import { Category } from '../../../../domain/category.entity';
+import { CategorySearchResult } from '../../../../domain/category.repository';
+import { CategorySequelizeRepository } from '../../../../infra/db/sequelize/category-sequelize.repository';
+import { CategoryModel } from '../../../../infra/db/sequelize/category.model';
+import { CategoryOutputMapper } from '../../common/category-output';
+import { ListCategoriesUsecase } from '../list-categories.usecase';
 
-describe("ListCategoriesUsecase Integration tests", () => {
+describe('ListCategoriesUsecase Integration tests', () => {
   let usecase: ListCategoriesUsecase;
   let categoryRepository: CategorySequelizeRepository;
 
@@ -18,7 +17,7 @@ describe("ListCategoriesUsecase Integration tests", () => {
     usecase = new ListCategoriesUsecase(categoryRepository);
   });
 
-  it("should work toOutput method", () => {
+  it('should work toOutput method', () => {
     let result = new CategorySearchResult({
       items: [],
       total: 1,
@@ -26,7 +25,7 @@ describe("ListCategoriesUsecase Integration tests", () => {
       per_page: 2,
     });
 
-    let output = usecase["toOutput"](result);
+    let output = usecase['toOutput'](result);
 
     expect(output).toStrictEqual({
       items: [],
@@ -36,7 +35,7 @@ describe("ListCategoriesUsecase Integration tests", () => {
       per_page: 2,
     });
 
-    const entity = Category.create({ name: "Category 1" });
+    const entity = Category.create({ name: 'Category 1' });
     result = new CategorySearchResult({
       items: [entity],
       total: 1,
@@ -44,7 +43,7 @@ describe("ListCategoriesUsecase Integration tests", () => {
       per_page: 2,
     });
 
-    output = usecase["toOutput"](result);
+    output = usecase['toOutput'](result);
 
     expect(output).toStrictEqual({
       items: [entity].map(CategoryOutputMapper.toOutput),
@@ -55,11 +54,11 @@ describe("ListCategoriesUsecase Integration tests", () => {
     });
   });
 
-  it("should return output sorted by created_at when input param is empty", async () => {
+  it('should return output sorted by created_at when input param is empty', async () => {
     const items = [
-      new Category({ name: "Category 1" }),
+      new Category({ name: 'Category 1' }),
       new Category({
-        name: "Category 2",
+        name: 'Category 2',
         created_at: new Date(new Date().getTime() + 100),
       }),
     ];
@@ -75,13 +74,13 @@ describe("ListCategoriesUsecase Integration tests", () => {
     });
   });
 
-  it("should return output using pagination, sort and filter", async () => {
+  it('should return output using pagination, sort and filter', async () => {
     const items = [
-      new Category({ name: "a" }),
-      new Category({ name: "AAA" }),
-      new Category({ name: "AaA" }),
-      new Category({ name: "b" }),
-      new Category({ name: "c" }),
+      new Category({ name: 'a' }),
+      new Category({ name: 'AAA' }),
+      new Category({ name: 'AaA' }),
+      new Category({ name: 'b' }),
+      new Category({ name: 'c' }),
     ];
 
     await categoryRepository.bulkInsert(items);
@@ -89,8 +88,8 @@ describe("ListCategoriesUsecase Integration tests", () => {
     let output = await usecase.execute({
       page: 1,
       per_page: 2,
-      sort: "name",
-      filter: "a",
+      sort: 'name',
+      filter: 'a',
     });
 
     expect(output).toStrictEqual({
@@ -104,8 +103,8 @@ describe("ListCategoriesUsecase Integration tests", () => {
     output = await usecase.execute({
       page: 2,
       per_page: 2,
-      sort: "name",
-      filter: "a",
+      sort: 'name',
+      filter: 'a',
     });
 
     expect(output).toStrictEqual({

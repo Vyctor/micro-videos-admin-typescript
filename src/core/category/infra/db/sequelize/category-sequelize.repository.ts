@@ -1,17 +1,17 @@
-import { Category } from "../../../domain/category.entity";
+import { Category } from '../../../domain/category.entity';
 import {
   CategoryRepository,
   CategorySearchParams,
   CategorySearchResult,
-} from "../../../domain/category.repository";
-import { Uuid } from "../../../domain/value-objects/uuid.vo";
-import { CategoryModel } from "./category.model";
-import { NotFoundError } from "../../../../shared/domain/errors/not-found.error";
-import { Op } from "sequelize";
-import { CategoryModelMapper } from "./category-model.mapper";
+} from '../../../domain/category.repository';
+import { Uuid } from '../../../domain/value-objects/uuid.vo';
+import { CategoryModel } from './category.model';
+import { NotFoundError } from '../../../../shared/domain/errors/not-found.error';
+import { Op } from 'sequelize';
+import { CategoryModelMapper } from './category-model.mapper';
 
 export class CategorySequelizeRepository implements CategoryRepository {
-  sortableFields: string[] = ["name", "created_at"];
+  sortableFields: string[] = ['name', 'created_at'];
 
   constructor(private categoryModel: typeof CategoryModel) {}
 
@@ -22,7 +22,7 @@ export class CategorySequelizeRepository implements CategoryRepository {
 
   async bulkInsert(entities: Category[]): Promise<void> {
     const models = entities.map((entity) =>
-      CategoryModelMapper.toModel(entity)
+      CategoryModelMapper.toModel(entity),
     );
     await this.categoryModel.bulkCreate(models.map((model) => model.toJSON()));
   }
@@ -72,7 +72,7 @@ export class CategorySequelizeRepository implements CategoryRepository {
       }),
       ...(params.sort && this.sortableFields.includes(params.sort)
         ? { order: [[params.sort, params.sort_dir]] }
-        : { order: [["created_at", "desc"]] }),
+        : { order: [['created_at', 'desc']] }),
       offset,
       limit,
     });

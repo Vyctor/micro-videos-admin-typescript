@@ -1,5 +1,5 @@
-import { ValueObject } from "../../../shared/domain/value-object";
-import { v4 as uuid, validate as uuidValidate } from "uuid";
+import { ValueObject } from '../../../shared/domain/value-object';
+import { v4 as uuid, validate as uuidValidate } from 'uuid';
 
 export class Uuid extends ValueObject {
   readonly id: string;
@@ -17,7 +17,7 @@ export class Uuid extends ValueObject {
 
 export class InvalidUUidError extends Error {
   constructor(message?: string) {
-    super(message || "ID must be a valid UUID");
-    this.name = "InvalidUUidError";
+    super(message || 'ID must be a valid UUID');
+    this.name = 'InvalidUUidError';
   }
 }

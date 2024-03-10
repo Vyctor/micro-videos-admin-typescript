@@ -1,19 +1,19 @@
-import { Usecase } from "../../../../shared/application/usecase.interface";
-import { SortDirection } from "../../../../shared/domain/repository/search-params";
+import { Usecase } from '../../../../shared/application/usecase.interface';
+import { SortDirection } from '../../../../shared/domain/repository/search-params';
 import {
   PaginationOutput,
   PaginationOutputMapper,
-} from "../../../../shared/application/paginations-output";
+} from '../../../../shared/application/paginations-output';
 import {
   CategoryFilter,
   CategoryRepository,
   CategorySearchParams,
   CategorySearchResult,
-} from "../../../domain/category.repository";
+} from '../../../domain/category.repository';
 import {
   CategoryOutput,
   CategoryOutputMapper,
-} from "../common/category-output";
+} from '../common/category-output';
 
 export type ListCategoriesUsecaseInput = {
   page?: number;
@@ -31,7 +31,7 @@ export class ListCategoriesUsecase
   constructor(private readonly categoryRepository: CategoryRepository) {}
 
   async execute(
-    input: ListCategoriesUsecaseInput
+    input: ListCategoriesUsecaseInput,
   ): Promise<ListCategoriesUsecaseOutput> {
     const params = new CategorySearchParams(input);
     const searchResult = await this.categoryRepository.search(params);
@@ -39,7 +39,7 @@ export class ListCategoriesUsecase
   }
 
   private toOutput(
-    searchResult: CategorySearchResult
+    searchResult: CategorySearchResult,
   ): ListCategoriesUsecaseOutput {
     const { items: _items } = searchResult;
     const items = _items.map((item) => {
