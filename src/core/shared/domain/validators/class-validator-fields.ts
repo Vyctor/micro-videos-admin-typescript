@@ -17,3 +17,4 @@ export abstract class ClassValidatorFields implements IValidatorFields {
     }
     return !errors.length;
   }
+}
