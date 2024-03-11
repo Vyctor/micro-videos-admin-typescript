@@ -1,4 +1,4 @@
-import { DynamicModule, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import {
   ConfigModuleOptions,
   ConfigModule as NestConfigModule,
@@ -44,10 +44,10 @@ export type CONFIG_SCHEMA_TYPE = DB_SCHEMA_TYPE;
 
 @Module({})
 export class ConfigModule extends NestConfigModule {
-  static forRoot(options: ConfigModuleOptions = {}): DynamicModule {
+  static forRoot(options: ConfigModuleOptions = {}) {
     const { envFilePath, ...otherOptions } = options;
+
     return super.forRoot({
-      ...options,
       isGlobal: true,
       envFilePath: [
         ...(Array.isArray(envFilePath) ? envFilePath : [envFilePath]),
