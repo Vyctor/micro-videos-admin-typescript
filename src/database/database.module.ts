@@ -29,6 +29,7 @@ const models = [CategoryModel];
         if (DB_VENDOR === 'sqlite') {
           return {
             dialect: DB_VENDOR,
+            host: configService.get('DB_HOST'),
             storage: configService.get('DB_DATABASE'),
             logging: configService.get('DB_LOGGING'),
             autoLoadModels: configService.get('DB_AUTO_LOAD_MODELS'),
