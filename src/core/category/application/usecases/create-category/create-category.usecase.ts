@@ -8,7 +8,7 @@ import {
 } from '../common/category-output';
 import { CreateCategoryInput } from './create-category.input';
 
-export class CreateCategoryUseCase
+export class CreateCategoryUsecase
   implements Usecase<CreateCategoryInput, CreateCategoryOutput>
 {
   constructor(private readonly categoryRepo: CategoryRepository) {}

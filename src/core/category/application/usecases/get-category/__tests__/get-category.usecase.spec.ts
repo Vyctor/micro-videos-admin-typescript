@@ -2,15 +2,15 @@ import { NotFoundError } from '../../../../../shared/domain/errors/not-found.err
 import { Category } from '../../../../domain/category.entity';
 import { Uuid } from '../../../../domain/value-objects/uuid.vo';
 import { CategoryInMemoryRepository } from '../../../../infra/db/in-memory/category-in-memory.repository';
-import { GetCategoryUseCase } from '../get-category.usecase';
+import { GetCategoryUsecase } from '../get-category.usecase';
 
 describe('GetCategoryUsecase Integration tests', () => {
-  let usecase: GetCategoryUseCase;
+  let usecase: GetCategoryUsecase;
   let categoryRepository: CategoryInMemoryRepository;
 
   beforeEach(() => {
     categoryRepository = new CategoryInMemoryRepository();
-    usecase = new GetCategoryUseCase(categoryRepository);
+    usecase = new GetCategoryUsecase(categoryRepository);
   });
 
   it('should throws when a category is not found', async () => {

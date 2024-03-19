@@ -2,17 +2,17 @@ import { setupSequelize } from '../../../../../shared/infra/testing/helpers';
 import { Uuid } from '../../../../domain/value-objects/uuid.vo';
 import { CategorySequelizeRepository } from '../../../../infra/db/sequelize/category-sequelize.repository';
 import { CategoryModel } from '../../../../infra/db/sequelize/category.model';
-import { CreateCategoryUseCase } from '../create-category.usecase';
+import { CreateCategoryUsecase } from '../create-category.usecase';
 
-describe('CreateCategoryUseCase Integration Tests', () => {
-  let useCase: CreateCategoryUseCase;
+describe('CreateCategoryUsecase Integration Tests', () => {
+  let useCase: CreateCategoryUsecase;
   let repository: CategorySequelizeRepository;
 
   setupSequelize({ models: [CategoryModel] });
 
   beforeEach(() => {
     repository = new CategorySequelizeRepository(CategoryModel);
-    useCase = new CreateCategoryUseCase(repository);
+    useCase = new CreateCategoryUsecase(repository);
   });
 
   it('should create a category', async () => {

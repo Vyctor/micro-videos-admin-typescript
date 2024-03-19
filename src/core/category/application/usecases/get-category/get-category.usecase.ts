@@ -12,7 +12,7 @@ export type GetCategoryUsecaseInput = {
   id: string;
 };
 
-export class GetCategoryUseCase
+export class GetCategoryUsecase
   implements Usecase<GetCategoryUsecaseInput, CategoryOutput>
 {
   constructor(private readonly categoryRepository: CategoryRepository) {}

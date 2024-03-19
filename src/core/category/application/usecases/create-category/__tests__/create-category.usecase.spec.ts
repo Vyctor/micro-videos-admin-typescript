@@ -1,13 +1,13 @@
 import { CategoryInMemoryRepository } from '../../../../infra/db/in-memory/category-in-memory.repository';
-import { CreateCategoryUseCase } from '../create-category.usecase';
+import { CreateCategoryUsecase } from '../create-category.usecase';
 
-describe('CreateCategoryUseCase Unit Tests', () => {
-  let useCase: CreateCategoryUseCase;
+describe('CreateCategoryUsecase Unit Tests', () => {
+  let useCase: CreateCategoryUsecase;
   let repository: CategoryInMemoryRepository;
 
   beforeEach(() => {
     repository = new CategoryInMemoryRepository();
-    useCase = new CreateCategoryUseCase(repository);
+    useCase = new CreateCategoryUsecase(repository);
   });
 
   it('should throw an error when aggregate is not valid', async () => {

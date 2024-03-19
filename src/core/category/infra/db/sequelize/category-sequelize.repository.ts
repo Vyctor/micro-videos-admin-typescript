@@ -29,29 +29,31 @@ export class CategorySequelizeRepository implements CategoryRepository {
 
   async update(entity: Category): Promise<void> {
     const id = entity.category_id.id;
-    const model = await this._get(id);
-    if (!model) {
+    const modelProps = CategoryModelMapper.toModel(entity);
+    const [affectedRows] = await this.categoryModel.update(
+      modelProps.toJSON(),
+      {
+        where: { category_id: entity.category_id.id },
+      },
+    );
+    if (affectedRows !== 1) {
       throw new NotFoundError(id, this.getEntity());
     }
-    const modelToUpdate = CategoryModelMapper.toModel(entity);
-    await this.categoryModel.update(modelToUpdate.toJSON(), {
-      where: { category_id: id },
-    });
   }
 
   async delete(entity_id: Uuid): Promise<void> {
     const id = entity_id.id;
-    const model = await this._get(id);
-    if (!model) {
-      throw new NotFoundError(id, this.getEntity());
-    }
-    await this.categoryModel.destroy({
+    const affectedRows = await this.categoryModel.destroy({
       where: { category_id: id },
     });
+
+    if (affectedRows !== 1) {
+      throw new NotFoundError(id, this.getEntity());
+    }
   }
 
   async findById(entity_id: Uuid): Promise<Category | null> {
-    const model = await this._get(entity_id.id);
+    const model = await this.categoryModel.findByPk(entity_id.id);
     return model ? CategoryModelMapper.toEntity(model) : null;
   }
 

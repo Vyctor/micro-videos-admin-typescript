@@ -5,15 +5,15 @@ import {
   Uuid,
 } from '../../../../domain/value-objects/uuid.vo';
 import { CategoryInMemoryRepository } from '../../../../infra/db/in-memory/category-in-memory.repository';
-import { UpdateCategoryUseCase } from '../update-category.usecase';
+import { UpdateCategoryUsecase } from '../update-category.usecase';
 
-describe('UpdateCategoryUseCase Unit Tests', () => {
-  let useCase: UpdateCategoryUseCase;
+describe('UpdateCategoryUsecase Unit Tests', () => {
+  let useCase: UpdateCategoryUsecase;
   let repository: CategoryInMemoryRepository;
 
   beforeEach(() => {
     repository = new CategoryInMemoryRepository();
-    useCase = new UpdateCategoryUseCase(repository);
+    useCase = new UpdateCategoryUsecase(repository);
   });
 
   it('should throws error when entity not found', async () => {

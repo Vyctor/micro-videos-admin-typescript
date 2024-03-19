@@ -10,7 +10,7 @@ import {
 } from '../common/category-output';
 import { UpdateCategoryInput } from './update-category.input';
 
-export class UpdateCategoryUseCase
+export class UpdateCategoryUsecase
   implements Usecase<UpdateCategoryInput, UpdateCategoryOutput>
 {
   constructor(private categoryRepo: CategoryRepository) {}

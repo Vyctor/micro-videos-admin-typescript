@@ -4,17 +4,17 @@ import { Category } from '../../../../domain/category.entity';
 import { Uuid } from '../../../../domain/value-objects/uuid.vo';
 import { CategorySequelizeRepository } from '../../../../infra/db/sequelize/category-sequelize.repository';
 import { CategoryModel } from '../../../../infra/db/sequelize/category.model';
-import { UpdateCategoryUseCase } from '../update-category.usecase';
+import { UpdateCategoryUsecase } from '../update-category.usecase';
 
-describe('UpdateCategoryUseCase Integration Tests', () => {
-  let useCase: UpdateCategoryUseCase;
+describe('UpdateCategoryUsecase Integration Tests', () => {
+  let useCase: UpdateCategoryUsecase;
   let repository: CategorySequelizeRepository;
 
   setupSequelize({ models: [CategoryModel] });
 
   beforeEach(() => {
     repository = new CategorySequelizeRepository(CategoryModel);
-    useCase = new UpdateCategoryUseCase(repository);
+    useCase = new UpdateCategoryUsecase(repository);
   });
 
   it('should throws error when entity not found', async () => {

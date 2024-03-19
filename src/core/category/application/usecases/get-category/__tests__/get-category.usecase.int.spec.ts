@@ -4,17 +4,17 @@ import { Category } from '../../../../domain/category.entity';
 import { Uuid } from '../../../../domain/value-objects/uuid.vo';
 import { CategorySequelizeRepository } from '../../../../infra/db/sequelize/category-sequelize.repository';
 import { CategoryModel } from '../../../../infra/db/sequelize/category.model';
-import { GetCategoryUseCase } from '../get-category.usecase';
+import { GetCategoryUsecase } from '../get-category.usecase';
 
 describe('GetCategoryUsecase Integration tests', () => {
-  let usecase: GetCategoryUseCase;
+  let usecase: GetCategoryUsecase;
   let categoryRepository: CategorySequelizeRepository;
 
   setupSequelize({ models: [CategoryModel] });
 
   beforeEach(() => {
     categoryRepository = new CategorySequelizeRepository(CategoryModel);
-    usecase = new GetCategoryUseCase(categoryRepository);
+    usecase = new GetCategoryUsecase(categoryRepository);
   });
 
   it('should throws when a category is not found', async () => {
