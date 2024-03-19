@@ -34,7 +34,18 @@ export class CategoriesController {
   private listCategoriesUsecase: ListCategoriesUsecase;
 
   @Post()
-  create(@Body() createCategoryDto: CreateCategoryDto) {}
+  async create(@Body() createCategoryDto: CreateCategoryDto) {
+    const usecaseResponse =
+      await this.createCategoryUsecase.execute(createCategoryDto);
+
+    return {
+      id: usecaseResponse.id,
+      name: usecaseResponse.name,
+      description: usecaseResponse.description,
+      isActive: usecaseResponse.is_active,
+      createdAt: usecaseResponse.created_at,
+    };
+  }
 
   @Get()
   findAll() {}
